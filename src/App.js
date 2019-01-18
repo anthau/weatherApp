@@ -50,7 +50,10 @@ function App() {
           }
 
        alert(JSON.stringify(data, null, 4))
-//       alert(JSON.stringify(data.locations[4], null, 8))
+       data.locations.map(loc => {
+          //alert('a=' + loc.info.position[0] + ' ' + loc.info.position[1]);
+      })
+
 
           setObservationLocations(data.locations
             .map(loc => {
@@ -74,8 +77,9 @@ function App() {
         subdomains='abcd'
         maxZoom={19}
       />
-     
-      {observationLocations.map(loc => <Marker position={[61.3,  23.45]}
+      
+       //Corrected position map
+      {observationLocations.map(loc => <Marker position={[loc.info.position[0],  loc.info.position[1]]}
                                                key={loc.info.id} onClick={() => setSelectedLocation(loc.info.id)}>
       </Marker>)}
     </MapContainer>
