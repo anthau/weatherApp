@@ -35,12 +35,13 @@ function App() {
     if (connection.connect('http://opendata.fmi.fi/wfs', 'fmi::observations::weather::cities::multipointcoverage')) {
       connection.getData({
         requestParameter : "temperature,windspeedms",
-        begin : (new Date("2019-01-16T15:00:00Z")).getTime(),
-        end : (new Date("2019-01-17T15:00:00Z")).getTime(),
+        begin : (new Date().getTime())  -  (25 * 60 * 60 * 1000),
+        end : (new Date().getTime()- 1 * 60 * 60 * 1000),
         timestep : 60 * 60 *1000,
         bbox: "20.6455928891, 59.846373196, 31.5160921567, 70.1641930203",
        // sites : [ "Tampere"],
         callback: (data, errors) => {
+      
           if (errors.length > 0) {
 
             errors.forEach(err => {
@@ -57,7 +58,7 @@ function App() {
               return {...loc, position: {lat, lon}}
             })
           );
-
+      alert('ready');
           connection.disconnect();
         }
       });
