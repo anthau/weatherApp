@@ -7,6 +7,9 @@ function Sidebar({selectedLocationId, observationLocations}) {
 
     const loc = observationLocations.find(loc => loc.info.id === id);
     return <div>
+        <pre>Valitse paikkakunta</pre>
+        <pre>Lämpötila</pre>
+        <pre>Tuulennopeus</pre>
         <pre>{loc && JSON.stringify(loc.info, null, 4)}</pre>
     </div>
 }

@@ -25,6 +25,7 @@ L.Icon.Default.mergeOptions({
 
 
 function App() {
+
   const [observationLocations, setObservationLocations] = useState([]);
 
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -33,11 +34,12 @@ function App() {
     const connection = new Metolib.WfsConnection();
     if (connection.connect('http://opendata.fmi.fi/wfs', 'fmi::observations::weather::cities::multipointcoverage')) {
       connection.getData({
-        begin: Date.now() - 60e3 * 60 * 24 * 6,
-        end: Date.now(),
-        requestParameter: "t,snowdepth,r_1h",
-        timestep: 60 * 60 * 1000,
+        requestParameter : "temperature,windspeedms",
+        begin : (new Date("2019-01-16T15:00:00Z")).getTime(),
+        end : (new Date("2019-01-17T15:00:00Z")).getTime(),
+        timestep : 60 * 60 *1000,
         bbox: "20.6455928891, 59.846373196, 31.5160921567, 70.1641930203",
+        sites : [ "Tampere"],
         callback: (data, errors) => {
           if (errors.length > 0) {
 
@@ -46,6 +48,9 @@ function App() {
             });
             return;
           }
+
+       alert(JSON.stringify(data, null, 4))
+//       alert(JSON.stringify(data.locations[4], null, 8))
 
           setObservationLocations(data.locations
             .map(loc => {
@@ -69,7 +74,8 @@ function App() {
         subdomains='abcd'
         maxZoom={19}
       />
-      {observationLocations.map(loc => <Marker position={[loc.position.lat, loc.position.lon]}
+     
+      {observationLocations.map(loc => <Marker position={[61.3,  23.45]}
                                                key={loc.info.id} onClick={() => setSelectedLocation(loc.info.id)}>
       </Marker>)}
     </MapContainer>
