@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import drawBig22 from './bigPicture';
 import './index.css';
 import 'leaflet/dist/leaflet.css';
 

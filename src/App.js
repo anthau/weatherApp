@@ -26,6 +26,7 @@ L.Icon.Default.mergeOptions({
 
 function App() {
 
+
   const [observationLocations, setObservationLocations] = useState([]);
 
   const [selectedLocation, setSelectedLocation] = useState(null);
