@@ -40,7 +40,7 @@ function App() {
         end : (new Date().getTime()- 1 * 60 * 60 * 1000),
         timestep : 60 * 60 *1000,
         bbox: "20.6455928891, 59.846373196, 31.5160921567, 70.1641930203",
-       // sites : [ "Tampere"],
+   
         callback: (data, errors) => {
       
           if (errors.length > 0) {
@@ -50,8 +50,7 @@ function App() {
             });
             return;
           }
-         var temperatureArray=data.locations[5].data.temperature.timeValuePairs;
-         var windspeedArray=data.locations[5].data.windspeedms.timeValuePairs;
+
 
           setObservationLocations(data.locations
             .map(loc => {
@@ -59,7 +58,7 @@ function App() {
               return {...loc, position: {lat, lon}}
             })
           );
-      alert('ready');
+        //  alert('ready');
           connection.disconnect();
         }
       });
@@ -76,7 +75,7 @@ function App() {
         maxZoom={19}
       />
 
-       //Corrected position map
+
       {observationLocations.map(loc => <Marker position={[loc.info.position[0],  loc.info.position[1]]}
                                                key={loc.info.id} onClick={() => setSelectedLocation(loc.info.id)}>
       </Marker>)}
