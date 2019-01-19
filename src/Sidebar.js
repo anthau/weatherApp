@@ -15,7 +15,7 @@ class FullScreen extends React.Component {
     var loc=props.data;
     this.data2=props.data1;
     this.text=props.text;
-    alert(this.text)
+
 
 
 
@@ -41,7 +41,7 @@ class FullScreen extends React.Component {
         
           <Line 
      data={this.data2}
-    width={1400}
+    width={1800}
     height={800}
 />
         </Modal>
@@ -61,12 +61,18 @@ function Sidebar({selectedLocationId, observationLocations}) {
     var valueWind=[];
     var time=[];
     var hour=0;
+   
     loc &&  temps.forEach(function(element) {
         value.push(element.value)
-        time.push(hour)
-        hour++;
+        var time1=new Date(element.time);
+        var minutes=time1.getMinutes()
+        if(minutes<10)
+             minutes='0' + minutes
+        time.push('' + time1.getHours() + ":" + minutes)
+
 
       });
+
       loc &&  winds.forEach(function(element) {
         valueWind.push(element.value)
     
@@ -74,8 +80,8 @@ function Sidebar({selectedLocationId, observationLocations}) {
 
       });
 
- 
- 
+      const math = require('mathjs')
+
     var dataset1= value
     var dataset2= valueWind
     const data = {
@@ -113,15 +119,16 @@ function Sidebar({selectedLocationId, observationLocations}) {
       if(id!=null && id!=undefined)
     return (<div >
       
-        <pre >   Valitse paikkakunta3</pre>
-        <pre>Keskilämpötila</pre>
-        <pre>keskituuli</pre>
+        
+        <pre>Keskilämpötila  <b>{math.round(math.mean(value),2)} C</b></pre>
+ 
+        <pre>keskituuli <b>{math.round(math.mean(valueWind),2)} m/s</b></pre>
         
         <pre  style={{'width':'50px'}}><b> {loc && loc.info.name}</b></pre>
       
         <pre>Lämpötila  </pre>
         <pre  style={{'width':'50px'}}><b>{loc && loc.data.temperature.timeValuePairs[loc.data.temperature.timeValuePairs.length-1].value} C </b></pre>
-        <pre>Tuulennopeus1</pre>
+        <pre>Tuulennopeus</pre>
         <pre><b>{loc && loc.data.windspeedms.timeValuePairs[loc.data.windspeedms.timeValuePairs.length-1].value}  m/s</b></pre>
          <div style={{'width':'300px','heigth':'30px'}}>
         <Line 
@@ -136,7 +143,7 @@ function Sidebar({selectedLocationId, observationLocations}) {
     width={100}
     height={70}
 />
-<FullScreen   text={'Wind1'}  data1={datawind}/>
+<FullScreen   text={'Wind'}  data1={datawind}/>
 
   </div>
     
