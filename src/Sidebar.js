@@ -15,10 +15,6 @@ class FullScreen extends React.Component {
  
     this.data2 = props.data1;
     this.text = props.text;
-
-
-
-
   }
   state = {
     open: false,
@@ -118,11 +114,12 @@ function Sidebar({ selectedLocationId, observationLocations }) {
     return (<div >
 
 
+
+      <pre style={{ 'width': '50px' }}><b> {loc && loc.info.name}</b></pre>
+      
       <pre>Keskilämpötila  <b>{math.round(math.mean(value), 2)} C</b></pre>
 
       <pre>keskituuli <b>{math.round(math.mean(valueWind), 2)} m/s</b></pre>
-
-      <pre style={{ 'width': '50px' }}><b> {loc && loc.info.name}</b></pre>
 
       <pre>Lämpötila  </pre>
       <pre style={{ 'width': '50px' }}><b>{loc && loc.data.temperature.timeValuePairs[loc.data.temperature.timeValuePairs.length - 1].value} C </b></pre>

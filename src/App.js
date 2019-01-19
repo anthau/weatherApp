@@ -58,7 +58,7 @@ function App() {
               return {...loc, position: {lat, lon}}
             })
           );
-        //  alert('ready');
+
           connection.disconnect();
         }
       });
