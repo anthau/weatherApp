@@ -6,7 +6,20 @@ import {Line} from 'react-chartjs-2';
 import Popup from "reactjs-popup";
 import Modal from 'react-responsive-modal';
 
-class HelloWorld extends React.Component {
+class FullScreen extends React.Component {
+  data1=null;
+  data2=null;
+  text='text'
+  constructor(props) {
+    super(props);
+    var loc=props.data;
+    this.data2=props.data1;
+    this.text=props.text;
+    alert(this.text)
+
+
+
+}
   state = {
     open: false,
   };
@@ -23,9 +36,14 @@ class HelloWorld extends React.Component {
     const { open } = this.state;
     return (
       <div>
-        <button onClick={this.onOpenModal}>Open modal</button>
-        <Modal open={open} onClose={this.onCloseModal} center>
-          <h2>Simple centered modal</h2>
+        <button onClick={this.onOpenModal}>{this.text}</button>
+        <Modal  open={open} onClose={this.onCloseModal} center>
+        
+          <Line 
+     data={this.data2}
+    width={1400}
+    height={800}
+/>
         </Modal>
       </div>
     );
@@ -34,6 +52,7 @@ class HelloWorld extends React.Component {
 
 function Sidebar({selectedLocationId, observationLocations}) {
     const id = getSelectedLocatoinId(selectedLocationId);
+  
     const loc = observationLocations.find(loc => loc.info.id === id);
 
     var temps=loc && loc.data.temperature.timeValuePairs;
@@ -91,9 +110,13 @@ function Sidebar({selectedLocationId, observationLocations}) {
         ]
       
       };
-    return <div >
-       <HelloWorld/>
+      if(id!=null && id!=undefined)
+    return (<div >
+      
         <pre >   Valitse paikkakunta3</pre>
+        <pre>Keskilämpötila</pre>
+        <pre>keskituuli</pre>
+        
         <pre  style={{'width':'50px'}}><b> {loc && loc.info.name}</b></pre>
       
         <pre>Lämpötila  </pre>
@@ -106,23 +129,20 @@ function Sidebar({selectedLocationId, observationLocations}) {
     width={100}
     height={70}
 />
-<button onClick={()=>{alert('jes')}}>Full Temperature picture</button>
+<FullScreen   text={'Temperature'}  data1={data}/>
 
 <Line 
     data={  datawind}
     width={100}
     height={70}
 />
-<button onClick={()=>{alert('jes1')}}>Full Wind picture</button>
+<FullScreen   text={'Wind1'}  data1={datawind}/>
 
-export default () => (
-  <Popup trigger={<button> Trigger</button>} position="right center">
-    <div>Popup content here !!</div>
-  </Popup>
-);
   </div>
     
-    </div>
+    </div>)
+    else
+     return (<p></p>)
 }
 
 export default styled(Sidebar)`
