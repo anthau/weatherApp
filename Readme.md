@@ -17,6 +17,7 @@ Käytetyt riippuvuudet
 Math.js
 react-chartjs2
 react-responsive-modal
+Antto Hautamäki
 
 
 
