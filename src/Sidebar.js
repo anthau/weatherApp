@@ -37,8 +37,7 @@ class FullScreen extends React.Component {
           <Line
             data={this.state.data}
             width={1800}
-            height={800}
-          />
+            height={800} />
         </Modal>
       </div>
     );
