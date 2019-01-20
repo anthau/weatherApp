@@ -18,7 +18,6 @@ class FullScreen extends React.Component {
   }
 
   onOpenModal() {
-
     this.setState({ open: true });
   };
 
@@ -68,11 +67,12 @@ function Sidebar({ selectedLocationId, observationLocations }) {
 
   });
 
+  //gets all wind data
   loc && winds.forEach(function (element) {
     valueWind.push(element.value);
   });
 
-  const math = require('mathjs')
+  const math = require("mathjs")
 
   var dataset1 = value
   var dataset2 = valueWind
@@ -82,10 +82,10 @@ function Sidebar({ selectedLocationId, observationLocations }) {
 
     datasets: [
       {
-        label: 'Temperature',
+        label: "Temperature",
         fill: false,
-        backgroundColor: 'rgba(75,192,192,0.4)',
-        borderColor: 'rgba(75,192,192,1)',
+        backgroundColor: "rgba(75,192,192,0.4)",
+        borderColor: "rgba(75,192,192,1)",
         data: dataset1
       }
 
@@ -93,9 +93,7 @@ function Sidebar({ selectedLocationId, observationLocations }) {
 
   };
   const datawind = {
-
     labels: time,
-
     datasets: [
       {
         label: "wind",
@@ -122,18 +120,15 @@ function Sidebar({ selectedLocationId, observationLocations }) {
         <Line
           data={data}
           width={100}
-          height={70}
-        />
+          height={70} />
         <FullScreen text={"Temperature"} data_graph={data} />
         <Line
           data={datawind}
           width={100}
-          height={70}
-        />
+          height={70} />
         <FullScreen 
           text={"Wind"} 
-          data_graph={datawind} 
-          />
+          data_graph={datawind} />
       </div>
 
     </div>)
